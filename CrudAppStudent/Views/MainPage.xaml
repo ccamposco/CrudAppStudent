@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CrudAppStudent.Views.MainPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+            <Label Text="REGISTER STUDENTS MVVM APP CRUD"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="TxtFirstName" Placeholder=" Enter student FirstName"/>
+            <Entry x:Name="TxtLastName" Placeholder=" Enter student LastName"/>
+            <Entry x:Name="TxtEmail" Placeholder=" Enter student Email"/>
+
+            <Button x:Name="btnRegister" Text="Register Student" />
+
+            <StackLayout>
+                <ListView x:Name="LstStudenData">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Id}" Grid.Row="0"
+                                           Grid.Column="0"/>
+                                    <Label Text="{Binding FirstName}" Grid.Row="0"
+                                           Grid.Column="0"/>
+                                    <Label Text="{Binding LastName}" Grid.Row="0"
+                                           Grid.Column="0"/>
+                                    <Label Text="{Binding Email}" Grid.Row="0"
+                                           Grid.Column="0"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
