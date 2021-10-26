@@ -1,4 +1,5 @@
-﻿using CrudAppStudent.Models;
+﻿using CrudAppStudent.Data;
+using CrudAppStudent.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,9 @@ namespace CrudAppStudent.ViewModels
             get { return students; }
         }
 
-        public ICommand SaveComannd
+        public StudentVM() { }
+
+        public ICommand SaveCommand
         {
             get
             {
@@ -33,6 +36,18 @@ namespace CrudAppStudent.ViewModels
                     _SaveCommand = new Command(SavetoDB);                     
                 }
                 return _SaveCommand;
+            }
+        }
+
+        public ICommand ShowCommand
+        {
+            get
+            {
+                if (_ShowCommand == null)
+                {
+                    _ShowCommand = new Command(ShowData);
+                }
+                return _ShowCommand;
             }
         }
 
@@ -77,6 +92,35 @@ namespace CrudAppStudent.ViewModels
             var firstName = FirstNameProp;
             var lastName = LastNameProp;
             var email = EmailProp;
+
+            DataLogic dl = new DataLogic();
+            bool success = dl.SavetoDB(firstName, lastName, email);
+            if (success)
+            {
+                FirstNameProp = string.Empty;
+                LastNameProp = string.Empty;
+                EmailProp = string.Empty;
+            }
+        }
+
+        private void ShowData()
+        {
+            DataLogic dataLogic = new DataLogic();
+            var lstStudent = dataLogic.ShowData();
+
+            foreach(var studentDetails in lstStudent)
+            {
+                Student student = new Student
+                {
+                    Id = studentDetails.Id,
+                    FirstName = studentDetails.FirstName,
+                    LastName = studentDetails.LastName,
+                    Email = studentDetails.Email,
+                };
+
+                Students.Add(student);
+            }
+
         }
     }
 }
